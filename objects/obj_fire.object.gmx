@@ -35,7 +35,7 @@ maxbright=0.9
 brightspeed=random(100)/10000
 //Create the light
 light = getLightId();
-d3d_light_define_point(light,x,y,40,600,make_color_rgb(255,255,100));
+d3d_light_define_point(light,x,y,40,1200,make_color_rgb(255,255,100));
 d3d_light_enable(light, true);
 
 //Create the sound emitter

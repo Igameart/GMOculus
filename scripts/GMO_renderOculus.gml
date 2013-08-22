@@ -7,6 +7,27 @@ xadd = r*cos(degtorad(hdir))*cos(degtorad(vdir));
 yadd = -r*sin(degtorad(hdir))*cos(degtorad(vdir));
 zadd = r*sin(degtorad(vdir));
 
+//move the eyes forward
+r = GMO_getIPD()*.75;
+hdir = argument3;
+vdir = argument4;
+
+xadd2 = r*cos(degtorad(hdir))*cos(degtorad(vdir));
+yadd2 = -r*sin(degtorad(hdir))*cos(degtorad(vdir));
+zadd2 = r*sin(degtorad(vdir));
+
+/*
+//now move the eyes up, so they pivot around an artificial neck joint
+//this following code doesnt work right. The eyes need to move straight up, and then to the left or right if you tilt your head, so far tilting your head moves the eyes forward or backwards instead.
+r = GMO_getIPD()*2;
+hdir = argument4;
+vdir = argument5;
+
+xadd2 += r*cos(degtorad(hdir))*cos(degtorad(vdir));
+yadd2 += -r*sin(degtorad(hdir))*cos(degtorad(vdir));
+zadd2 += r*sin(degtorad(vdir));*/
+
+
 aspect = (GMO_getResolutionWidth()/2) / GMO_getResolutionHeight();
 
 //Draw all the 3D instances for the left eye
@@ -14,7 +35,7 @@ surface_set_target(GMO_getSurface(SURF_LEFT));
     draw_clear(c_white);
     //draw_clear_alpha(c_black,0);
     d3d_set_lighting(true);
-    d3d_set_projection_simple(argument0+xadd,argument1+yadd,argument2+zadd,argument3,argument4,argument5, argument6, aspect, argument8, argument9);
+    d3d_set_projection_simple(argument0+xadd+xadd2,argument1+yadd+yadd2,argument2+zadd+zadd2, argument3,argument4,argument5, argument6, aspect, argument8, argument9);
     GMO_draw3DInstances(); // Take a look at this function.
     d3d_transform_set_identity();
     
@@ -23,7 +44,7 @@ surface_set_target(GMO_getSurface(SURF_RIGHT));
     draw_clear(c_white);
     //draw_clear_alpha(c_black,0);
     d3d_set_lighting(true);
-    d3d_set_projection_simple(argument0-xadd,argument1-yadd,argument2-zadd,argument3,argument4,argument5, argument6, aspect, argument8, argument9);
+    d3d_set_projection_simple(argument0-xadd+xadd2,argument1-yadd+yadd2,argument2-zadd+zadd2,argument3,argument4,argument5, argument6, aspect, argument8, argument9);
     GMO_draw3DInstances(); // Take a look at this function.
     d3d_transform_set_identity();
     
