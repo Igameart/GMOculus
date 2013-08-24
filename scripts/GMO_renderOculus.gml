@@ -8,9 +8,9 @@ yadd = -r*sin(degtorad(hdir))*cos(degtorad(vdir));
 zadd = r*sin(degtorad(vdir));
 
 //move the eyes forward
-r = GMO_getIPD()*.75;
-hdir = argument3;
-vdir = argument4;
+r = GMO_getIPD()*.9;
+hdir = argument4;
+vdir = argument5+90;
 
 xadd2 = r*cos(degtorad(hdir))*cos(degtorad(vdir));
 yadd2 = -r*sin(degtorad(hdir))*cos(degtorad(vdir));
